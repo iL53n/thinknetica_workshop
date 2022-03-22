@@ -3,7 +3,10 @@ module Api
     class BooksController < Api::V1::BaseController
       def index
         meta = BookPresenter.new.meta
-        render json: BookSerializer.new(books, { meta: meta })
+        scope = Book.all
+        @books = ::QueryBuilder.new(params, scope).call
+
+        render json: BookSerializer.new(@books, { meta: meta })
       end
 
       def show
@@ -53,7 +56,8 @@ module Api
       end
 
       def books
-        @books ||= Book.all
+        scope = Book.all
+        @books ||= ::QueryBuilder.new(params, scope)
       end
     end
   end
