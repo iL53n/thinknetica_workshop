@@ -2,26 +2,26 @@ module Api
   module V1
     class BooksController < Api::V1::BaseController
       def index
-        render json: books
+        render json: BookSerializer.new(books)
       end
 
       def show
-        render json: book
+        render json: BookSerializer.new(book)
       end
 
       def create
         @book = Book.new(book_params)
 
         if @book.save
-          render json: book, status: :created
+          render json: BookSerializer.new(@book), status: :created
         else
-          render json: { errors: book.errors }, status: :unprocessable_entity
+          render json: { errors: @book.errors }, status: :unprocessable_entity
         end
       end
 
       def update
         if book.update(book_params)
-          render json: book, status: :created
+          render json: BookSerializer.new(book), status: :created
         else
           render json: { errors: book.errors }, status: :unprocessable_entity
         end
