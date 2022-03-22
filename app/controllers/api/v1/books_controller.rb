@@ -2,7 +2,8 @@ module Api
   module V1
     class BooksController < Api::V1::BaseController
       def index
-        render json: BookSerializer.new(books)
+        meta = BookPresenter.new.meta
+        render json: BookSerializer.new(books, { meta: meta })
       end
 
       def show
