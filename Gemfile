@@ -13,6 +13,8 @@ gem 'puma', '~> 5.0'
 # gem 'jbuilder', '~> 2.7'
 # A fast JSON:API serializer for Ruby Objects
 gem 'jsonapi-serializer'
+# Dry-validation is a data validation library that provides a powerful DSL for defining schemas and validation rules
+gem 'dry-validation'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password

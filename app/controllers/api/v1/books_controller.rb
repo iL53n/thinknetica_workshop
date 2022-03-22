@@ -11,7 +11,7 @@ module Api
       end
 
       def create
-        @book = Book.new(book_params)
+        @book = Book.new(book_params.to_h)
 
         if @book.save
           render json: BookSerializer.new(@book), status: :created
@@ -39,7 +39,13 @@ module Api
       private
 
       def book_params
-        params.require(:book).permit(:title, :body, :author)
+        permited_params = params.require(:book).permit(:title, :body, :author)
+        book_contract(permited_params)
+      end
+
+      def book_contract(permited_params)
+        contract = BookParamsContract.new
+        contract.call(permited_params.to_h)
       end
 
       def book
