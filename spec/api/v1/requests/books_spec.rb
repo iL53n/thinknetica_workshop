@@ -2,7 +2,7 @@ require 'rails_helper'
 
 API_V1 = 'api/v1'.freeze
 
-describe 'routing to books' do
+describe 'Routing to books', type: :routing do
   context API_V1 do
     it 'routes /books to books#index' do
       expect(get: "#{API_V1}/books").to route_to(
