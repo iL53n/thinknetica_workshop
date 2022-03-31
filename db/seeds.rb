@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+unless Book.any?
+  10.times do |n|
+    Book.create!(title: "Book_#{n}",
+                 body: "body body body",
+                 author: "Author_#{n}")
+  end
+end
