@@ -19,7 +19,7 @@ module Api
         if @book.save
           render json: BookSerializer.new(@book), status: :created
         else
-          render json: { errors: @book.errors }, status: :unprocessable_entity
+          error_response(:unprocessable_entity, @book)
         end
       end
 
@@ -27,7 +27,7 @@ module Api
         if book.update(book_params)
           render json: BookSerializer.new(book), status: :created
         else
-          render json: { errors: book.errors }, status: :unprocessable_entity
+          error_response(:unprocessable_entity, @book)
         end
       end
 
@@ -35,7 +35,7 @@ module Api
         if book.destroy
           render json: {}, status: :ok
         else
-          render json: { errors: book.errors }, status: :unprocessable_entity
+          error_response(:unprocessable_entity, @book)
         end
       end
 
